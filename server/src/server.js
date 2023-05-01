@@ -2,12 +2,14 @@ import express from "express";
 import "dotenv/config";
 import router  from "./router/index.routes.js";
 import getDatas from "./middleware/getDatas.js";
+import cors from 'cors';
 
 
 const PORT = process.env.LOCAL_PORT;
 const app = express();
 
 app
+.use (cors())
   .use(express.static("public")) // defini le repertoire des fichiers statics
   .use(express.urlencoded({ extended: true })) // permet de recuperer les formulaires
   .use(express.json())  // necessaire pour les imports/exports Json!!
