@@ -42,6 +42,7 @@ export const productCreate = (req, res) => {
     
     const datas = res.locals.datas;
     let prodToAdd = req.body; 
+    console.log(prodToAdd)
     const id = uuidv4();
     // ajout de l'id au nouvel article
     prodToAdd.id = id;
@@ -57,7 +58,7 @@ export const productCreate = (req, res) => {
 
     datas.push(prodToAdd);
     UpdateFile (datas);
-    res.status(200).send("New product created");
+    res.status(200).send("product added");
 };
 
 

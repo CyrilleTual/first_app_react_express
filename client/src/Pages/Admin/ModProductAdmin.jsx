@@ -1,26 +1,41 @@
-import React, { useState } from 'react';
+import React from 'react'
+import { useParams } from 'react-router-dom';
 import { BASE_URL } from '../../data/const';
+import { useEffect } from 'react';
 
-function NewProductAdmin() {
 
-  const [values, setValues] = React.useState ({}) 
+function ModProductAdmin() {
+  // recupération de l'id
+  const { id } = useParams();
+
+  const [item, setItem] = React.useState({});
+
+  // recup du produit
+  useEffect(() => {
+    let urlReq = `${BASE_URL}/products/${id}`;
+    fetch(urlReq)
+      .then((res) => res.json())
+      .then((datas) => setItem(datas[0]));
+  }, [id]);
+
+  console.log(item);
 
   const handleChange = (e) => {
-    setValues({...values,[e.target.name]:e.target.value})
-  }
+    setItem({ ...item, [e.target.name]: e.target.value });
+  };
 
-  // ajout de produit : 
+  // ajout de produit :
   const handleSubmit = (e) => {
     e.preventDefault();
-    let urlReq = `${BASE_URL}/products`;
+    let urlReq = `${BASE_URL}/products/${id}`;
     fetch(urlReq, {
-      method: "POST",
+      method: "PUT",
       headers: new Headers({ "content-type": "application/json" }),
-      body: JSON.stringify(values),
+      body: JSON.stringify(item),
     })
       .then((res) => res.text())
       .then((res) => console.log(res));
-  }
+  };
 
   return (
     <>
@@ -30,7 +45,7 @@ function NewProductAdmin() {
           type="text"
           id="title"
           name="title"
-          value={values.title}
+          value={item.title}
           onChange={handleChange}
         />
         <label htmlFor="description">Description</label>
@@ -38,7 +53,7 @@ function NewProductAdmin() {
           type="text"
           id="description"
           name="description"
-          value={values.description}
+          value={item.description}
           onChange={handleChange}
         />
         <label htmlFor="price">prix</label>
@@ -46,13 +61,13 @@ function NewProductAdmin() {
           type="text"
           id="price"
           name="price"
-          value={values.price}
+          value={item.price}
           onChange={handleChange}
         />
-        <input type="submit" value="Add" />
+        <input type="submit" value="Modify" />
       </form>
     </>
   );
 }
 
-export default NewProductAdmin
+export default ModProductAdmin
