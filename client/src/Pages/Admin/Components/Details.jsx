@@ -33,12 +33,11 @@ function Details({idSelected}) {
 
   return (
     <>
-      <div>Details produit {idSelected}</div>
       <article>
         {<h3>{selectiond.title}</h3>}
-        {selectiond.id && <p>{selectiond.id}</p>}
+        {selectiond.id && <p> id : {selectiond.id}</p>}
         {selectiond.description && <p>{selectiond.description}</p>}
-        {selectiond.price && <p>{selectiond.price}</p>}
+        {selectiond.price && <p>Prix: {selectiond.price} Euros</p>}
         <button onClick={deleteOne} value={selectiond.id}>
           Delete
         </button>

@@ -1,0 +1,39 @@
+.cat{
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    margin: auto;
+    padding: 10px; 
+}
+
+.cat ul {
+    width: 48%;
+    background-color: rgb(223, 222, 222);
+     list-style-type: none;
+}
+
+.cat .right{
+    display: block;
+    width: 48%;
+    background-color: #fff;
+}
+
+.cat ul, .cat .right{
+    padding: 10px;
+    border-radius: 15px;
+   
+
+}
+
+.cat li {
+    margin-bottom: 10px;
+}
+
+.cat li button {
+    display: block;
+   margin: auto;
+   padding: 2px;
+   margin-top: 3px;
+}

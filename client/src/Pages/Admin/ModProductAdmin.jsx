@@ -1,7 +1,8 @@
 import React from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { BASE_URL } from '../../data/const';
 import { useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 
 
 function ModProductAdmin() {
@@ -9,6 +10,8 @@ function ModProductAdmin() {
   const { id } = useParams();
 
   const [item, setItem] = React.useState({});
+
+  const navigate = useNavigate();
 
   // recup du produit
   useEffect(() => {
@@ -18,13 +21,11 @@ function ModProductAdmin() {
       .then((datas) => setItem(datas[0]));
   }, [id]);
 
-  console.log(item);
-
   const handleChange = (e) => {
     setItem({ ...item, [e.target.name]: e.target.value });
   };
 
-  // ajout de produit :
+  // modif  de produit :
   const handleSubmit = (e) => {
     e.preventDefault();
     let urlReq = `${BASE_URL}/products/${id}`;
@@ -35,6 +36,8 @@ function ModProductAdmin() {
     })
       .then((res) => res.text())
       .then((res) => console.log(res));
+    navigate('/adminCatalog');
+
   };
 
   return (

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavAdmin from "./Components/NavAdmin";
 import { BASE_URL } from "../../data/const";
+import style from "./catalogAdmin.module.css"
 import Details from "./Components/Details";
 
 
@@ -25,21 +26,22 @@ function CatalogAdmin() {
   return (
     <>
       <NavAdmin />
-      <ul>
-        {products.map((product, i) => (
-          <li>
-            <article key={i}>
-              {<h3>{product.title}</h3>}
-              {product.description && <p>{product.description}</p>}
-              <button onClick={onClick} value={product.id}>
-                Voir détails
-              </button>
-            </article>
-          </li>
-        ))}
-      </ul>
-      <div>
-        {idSelected !== "" && <Details idSelected={idSelected} />}
+
+      <div className={style.cat}>
+        <ul>
+          {products.map((product, i) => (
+            <li>
+              <article key={i}>
+                {<h3>{product.title}</h3>}
+                {product.description && <p>{product.description}</p>}
+                <button onClick={onClick} value={product.id}>
+                  Voir détails
+                </button>
+              </article>
+            </li>
+          ))}
+        </ul>
+        <div class={style.right}>dd{idSelected !== "" && <Details idSelected={idSelected} />}</div>
       </div>
     </>
   );
